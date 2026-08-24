@@ -14,6 +14,8 @@
       <a href="index.html#install">Install</a>
       <a href="usage.html">Usage</a>
       <a href="index.html#examples">Examples</a>
+      <a href="https://github.com/theworker02/jsonptrget">GitHub</a>
+      <a href="https://github.com/theworker02/jsonptrget/releases/tag/v1.0.0">1.00</a>
     </div>
   </nav>
   
@@ -46,7 +48,7 @@
     <section id="examples">
       <h2>Worked examples</h2>
       <h3 class="ok">Success path</h3>
-      <pre><code>echo '{"a":{"b":[false, {"x/y": 9}]}}' | jsonptrget /a/b/1/x~1y</code></pre><p>Prints `9`.</p>
+      <pre><code>echo '{"a":{"b":[false, {"x/y": 9}]}}' | jsonptrget /a/b/1/x~1y</code></pre><p>Prints <code>9</code>.</p>
       <h3 class="fail">Failure path</h3>
       <pre><code>echo '{"a":1}' | jsonptrget /missing</code></pre><pre><code>missing missing</code></pre><p>Exit code is 1.</p>
     </section>

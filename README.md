@@ -1,6 +1,6 @@
 # jsonptrget
 
-<img src="docs/logo.svg" alt="jsonptrget mark" width="88" height="88">
+<img src="docs/logo.svg" alt="jsonptrget mark" width="96" height="96">
 
 **Read JSON from stdin and print the value at a pointer such as /a/b.**
 
@@ -11,6 +11,8 @@
 ![release 1.00](https://img.shields.io/github/v/release/theworker02/jsonptrget?display_name=release)
 
 Package version **1.00** (`1.0.0`). Default branch is **`main`** — never `master`.
+
+**Docs:** [GitHub Pages](https://theworker02.github.io/jsonptrget/) · **Source:** [`theworker02/jsonptrget`](https://github.com/theworker02/jsonptrget) · **Release 1.00:** [`v1.0.0`](https://github.com/theworker02/jsonptrget/releases/tag/v1.0.0)
 
 ## Why it exists
 
