@@ -15,10 +15,23 @@ describe("cli help and version", () => {
     assert.equal(result.status, 0);
     assert.match(result.stdout, /Usage/i);
     assert.match(result.stdout, /--help/);
+    assert.match(result.stdout, /-V/);
+  });
+
+  it("prints detailed usage on -h", () => {
+    const result = run(["-h"]);
+    assert.equal(result.status, 0);
+    assert.match(result.stdout, /Usage/i);
   });
 
   it("prints 1.0.0 on --version", () => {
     const result = run(["--version"]);
+    assert.equal(result.status, 0);
+    assert.equal(result.stdout.trim(), "1.0.0");
+  });
+
+  it("prints 1.0.0 on -V", () => {
+    const result = run(["-V"]);
     assert.equal(result.status, 0);
     assert.equal(result.stdout.trim(), "1.0.0");
   });

@@ -58,23 +58,57 @@ Prints `3`.
 
 ## CLI reference
 
-Synopsis:
-
 ```text
-jsonptrget [options] <pointer>
-```
+jsonptrget 1.00 (1.0.0)
 
-| Flag / argument | Meaning |
-| --- | --- |
-| `-h, --help` | Print detailed usage and exit 0. |
-| `-v, --version` | Print 1.0.0 and exit 0. |
-| `<pointer>` | JSON Pointer starting with /. Empty pointer is the whole document. ~0 and ~1 unescaping is supported. |
+Usage:
+  jsonptrget [options] <pointer...> [file|-]
+  jsonptrget /name < pkg.json
+  echo '{"a":{"b":1}}' | jsonptrget /a/b
+
+Read JSON from a file or stdin and print the value at one or more
+RFC 6901 JSON Pointers.
+
+Pointers:
+  /a/b       object walk
+  /items/0   array index
+  ~1         escaped slash
+  ~0         escaped tilde
+  (empty)    whole document — pass "" as the pointer
+
+Options:
+  -h, --help         Show this help and exit 0
+  -V, -v, --version  Print 1.0.0 and exit 0
+  --raw              Print string values without JSON quotes
+  --pretty           Pretty-print JSON values
+  --file <path>      JSON file (otherwise last positional path, or stdin)
+  --set <json>       Set the first pointer to this JSON value and print the
+                     whole document (writes stdout only; does not save)
+
+When several pointers are given, each value is printed on its own line.
+With more than one pointer, --json is implied as
+  [{"pointer","value"}, ...]
+
+Exit codes:
+  0  every pointer resolved (or --set succeeded)
+  1  missing pointer, invalid JSON, or unreadable file
+
+Examples:
+  jsonptrget /name package.json
+  jsonptrget --pretty /scripts package.json
+  jsonptrget --raw /greeting <<EOF
+  {"greeting":"hi"}
+  EOF
+  jsonptrget --set '{"ok":true}' /flag data.json
+```
 
 Print the same text locally:
 
 ```bash
 jsonptrget --help
+jsonptrget -h
 jsonptrget --version
+jsonptrget -V
 ```
 
 Expected version output:
@@ -85,33 +119,39 @@ Expected version output:
 
 ## Configuration
 
-JSON is read from stdin. Strings print raw; other values print JSON.stringify. Missing paths error.
+JSON Pointer (RFC 6901). Read a file or stdin. `--raw` prints strings without quotes.
 
 ## Exit codes
 
 | Code | Meaning |
 | --- | --- |
-| `0` | Pointer resolved. |
-| `1` | Missing pointer, invalid JSON, or missing path. |
+| `0` | Every pointer resolved, or --set succeeded. |
+| `1` | Missing pointer, invalid JSON, or unreadable file. |
 
 ## Examples
 
 ### Success path
 
-```bash
-echo '{"a":{"b":[false, {"x/y": 9}]}}' | jsonptrget /a/b/1/x~1y
-```
-
-Prints `9`.
-
-### Failure path
+Read a pointer from a JSON file.
 
 ```bash
-echo '{"a":1}' | jsonptrget /missing
+jsonptrget --raw /greeting data.json
 ```
 
 ```text
-missing missing
+hi
+```
+
+### Failure path
+
+A missing pointer exits 1.
+
+```bash
+jsonptrget /nope data.json
+```
+
+```text
+missing nope
 ```
 
 Exit code is 1.

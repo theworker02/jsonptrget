@@ -30,27 +30,67 @@
   <div class="wrap">
     <section>
       <h2>Synopsis</h2>
-      <pre><code>jsonptrget [options] &lt;pointer&gt;</code></pre>
-      <div class="callout sans"><strong>Tip:</strong> <code>jsonptrget --help</code> prints this text in the terminal. <code>jsonptrget --version</code> prints <code>1.0.0</code>.</div>
+      <pre><code>jsonptrget 1.00 (1.0.0)
+
+Usage:
+  jsonptrget [options] &lt;pointer...&gt; [file|-]
+  jsonptrget /name &lt; pkg.json
+  echo '{"a":{"b":1}}' | jsonptrget /a/b
+
+Read JSON from a file or stdin and print the value at one or more
+RFC 6901 JSON Pointers.
+
+Pointers:
+  /a/b       object walk
+  /items/0   array index
+  ~1         escaped slash
+  ~0         escaped tilde
+  (empty)    whole document — pass "" as the pointer
+
+Options:
+  -h, --help         Show this help and exit 0
+  -V, -v, --version  Print 1.0.0 and exit 0
+  --raw              Print string values without JSON quotes
+  --pretty           Pretty-print JSON values
+  --file &lt;path&gt;      JSON file (otherwise last positional path, or stdin)
+  --set &lt;json&gt;       Set the first pointer to this JSON value and print the
+                     whole document (writes stdout only; does not save)
+
+When several pointers are given, each value is printed on its own line.
+With more than one pointer, --json is implied as
+  [{"pointer","value"}, ...]
+
+Exit codes:
+  0  every pointer resolved (or --set succeeded)
+  1  missing pointer, invalid JSON, or unreadable file
+
+Examples:
+  jsonptrget /name package.json
+  jsonptrget --pretty /scripts package.json
+  jsonptrget --raw /greeting &lt;&lt;EOF
+  {"greeting":"hi"}
+  EOF
+  jsonptrget --set '{"ok":true}' /flag data.json</code></pre>
+      <div class="callout sans"><strong>Tip:</strong> <code>jsonptrget --help</code> and <code>-h</code> print this text. <code>jsonptrget --version</code> and <code>-V</code> print <code>1.0.0</code>.</div>
     </section>
     <section>
       <h2>Flags and arguments</h2>
-      <table class="sans"><thead><tr><th>Flag / argument</th><th>Meaning</th></tr></thead><tbody><tr><td><code>-h, --help</code></td><td>Print detailed usage and exit 0.</td></tr><tr><td><code>-v, --version</code></td><td>Print 1.0.0 and exit 0.</td></tr><tr><td><code>&lt;pointer&gt;</code></td><td>JSON Pointer starting with /. Empty pointer is the whole document. ~0 and ~1 unescaping is supported.</td></tr></tbody></table>
+      <p>The complete flag list is in <code>jsonptrget --help</code> (shown above). Human output is the default; pass <code>--json</code> where supported.</p>
     </section>
     <section>
       <h2>Exit codes</h2>
-      <table class="sans"><thead><tr><th>Code</th><th>Meaning</th></tr></thead><tbody><tr><td><code>0</code></td><td>Pointer resolved.</td></tr><tr><td><code>1</code></td><td>Missing pointer, invalid JSON, or missing path.</td></tr></tbody></table>
+      <table class="sans"><thead><tr><th>Code</th><th>Meaning</th></tr></thead><tbody><tr><td><code>0</code></td><td>Every pointer resolved, or --set succeeded.</td></tr><tr><td><code>1</code></td><td>Missing pointer, invalid JSON, or unreadable file.</td></tr></tbody></table>
     </section>
     <section>
       <h2>Configuration</h2>
-      <p>JSON is read from stdin. Strings print raw; other values print JSON.stringify. Missing paths error.</p>
+      <p>JSON Pointer (RFC 6901). Read a file or stdin. `--raw` prints strings without quotes.</p>
     </section>
     <section id="examples">
       <h2>Worked examples</h2>
       <h3 class="ok">Success path</h3>
-      <pre><code>echo '{"a":{"b":[false, {"x/y": 9}]}}' | jsonptrget /a/b/1/x~1y</code></pre><p>Prints <code>9</code>.</p>
+      <p>Read a pointer from a JSON file.</p><pre><code>jsonptrget --raw /greeting data.json</code></pre><pre><code>hi</code></pre>
       <h3 class="fail">Failure path</h3>
-      <pre><code>echo '{"a":1}' | jsonptrget /missing</code></pre><pre><code>missing missing</code></pre><p>Exit code is 1.</p>
+      <p>A missing pointer exits 1.</p><pre><code>jsonptrget /nope data.json</code></pre><pre><code>missing nope</code></pre><p>Exit code is 1.</p>
     </section>
   </div>
   <footer class="sans">
