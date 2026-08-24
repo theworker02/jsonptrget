@@ -3,29 +3,92 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>jsonptrget 1.00</title>
+  <title>jsonptrget  · 1.00</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <div class="wrap brand">
-      <img src="logo.svg" alt="jsonptrget mark">
-      <div>
-        <h1>jsonptrget</h1>
-        <p class="tag">JSON Pointer getter · version 1.00</p>
+  <nav class="nav sans">
+    <a class="brand-lockup" href="index.html"><img src="logo.svg" alt=""> jsonptrget</a>
+    <div class="links">
+      <a href="index.html#overview">Overview</a>
+      <a href="index.html#install">Install</a>
+      <a href="usage.html">Usage</a>
+      <a href="index.html#examples">Examples</a>
+    </div>
+  </nav>
+  
+  <header class="hero">
+    <img src="logo.svg" alt="jsonptrget mark">
+    <div>
+      <p class="kicker sans">theworker02 · version 1.00</p>
+      <h1>jsonptrget</h1>
+      <p class="lede">Read JSON from stdin and print the value at a pointer such as /a/b.</p>
+      <div class="badges sans">
+        <span class="badge">1.00 / 1.0.0</span>
+        <span class="badge">branch main</span>
+        <span class="badge">MIT</span>
+        <span class="badge">Node.js >= 18</span>
       </div>
     </div>
   </header>
-  <main class="wrap">
-    <section class="card">
-      <h2>Purpose</h2>
-      <p>Read JSON from stdin and print the value at a JSON Pointer such as /a/b.</p>
-      <h2>Install</h2>
-      <pre><code>npm install -g jsonptrget</code></pre>
-      <h2>Usage</h2>
-      <pre><code>jsonptrget /a/b < data.json</code></pre>
+  <div class="wrap">
+    <section id="overview">
+      <h2>Overview</h2>
+      <p>jq is powerful but heavy for one lookup. jsonptrget implements JSON Pointer (RFC 6901) for a single get.</p>
+      <p>Script authors extracting one field from an API body or a lockfile without a full JSON query language.</p>
     </section>
-    <footer>MIT © 2026 theworker02 · version 1.00 (1.0.0) · navy #0B1F33 · gold #C9A227</footer>
-  </main>
+    <section id="install">
+      <h2>Install</h2>
+      <p>Install globally from Git, or run with Node from a clone. There are no extra dependencies.</p>
+      <pre><code>npm install -g git+https://github.com/theworker02/jsonptrget.git
+jsonptrget --help
+node src/cli.js --help</code></pre>
+    </section>
+    <section id="usage">
+      <h2>Usage</h2>
+      <p>Synopsis: <code>jsonptrget [options] &lt;pointer&gt;</code></p>
+      <p>See the <a href="usage.html">full CLI reference</a> for every flag, exit code, and example.</p>
+      <pre><code>jsonptrget 1.00 (1.0.0)
+
+Usage:
+  jsonptrget &lt;pointer&gt; &lt; data.json
+  jsonptrget --help
+  jsonptrget --version
+
+JSON Pointer (RFC 6901):
+  /a/b       object walk
+  /items/0   array index
+  ~1         escaped slash
+  ~0         escaped tilde
+  (empty)    whole document
+
+Options:
+  -h, --help       Show this help
+  -v, --version    Print 1.0.0
+
+Examples:
+  jsonptrget /name &lt; pkg.json
+  echo '{"a":{"b":1}}' | jsonptrget /a/b</code></pre>
+    </section>
+    <section id="examples">
+      <h2>Examples</h2>
+      <div class="grid-2">
+        <div>
+          <h3 class="ok">Success</h3>
+          <pre><code>echo '{"a":{"b":[false, {"x/y": 9}]}}' | jsonptrget /a/b/1/x~1y</code></pre><p>Prints `9`.</p>
+        </div>
+        <div>
+          <h3 class="fail">Failure</h3>
+          <pre><code>echo '{"a":1}' | jsonptrget /missing</code></pre><pre><code>missing missing</code></pre><p>Exit code is 1.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+  <footer class="sans">
+    MIT © 2026 theworker02 · version <strong>1.00</strong> (<code>1.0.0</code>) ·
+    navy <code>#0B1F33</code> · gold <code>#C9A227</code> ·
+    <a href="https://github.com/theworker02/jsonptrget">GitHub</a> ·
+    <a href="https://thanks.dev/u/gh/theworker02">thanks.dev</a>
+  </footer>
 </body>
 </html>

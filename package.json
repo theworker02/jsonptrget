@@ -1,7 +1,7 @@
 {
   "name": "jsonptrget",
   "version": "1.0.0",
-  "description": "Get a JSON Pointer value from stdin JSON.",
+  "description": "Read JSON from stdin and print the value at a pointer such as /a/b.",
   "bin": {
     "jsonptrget": "./src/cli.js"
   },
@@ -12,5 +12,25 @@
   "license": "MIT",
   "engines": {
     "node": ">=18"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theworker02/jsonptrget.git"
+  },
+  "homepage": "https://theworker02.github.io/jsonptrget/",
+  "bugs": {
+    "url": "https://github.com/theworker02/jsonptrget/issues"
+  },
+  "files": [
+    "src",
+    "docs",
+    "LICENSE",
+    "README.md"
+  ],
+  "keywords": [
+    "json",
+    "json-pointer",
+    "rfc6901",
+    "cli"
+  ]
 }

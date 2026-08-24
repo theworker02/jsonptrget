@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jsonptrget usage · 1.00</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="nav sans">
+    <a class="brand-lockup" href="index.html"><img src="logo.svg" alt=""> jsonptrget</a>
+    <div class="links">
+      <a href="index.html#overview">Overview</a>
+      <a href="index.html#install">Install</a>
+      <a href="usage.html">Usage</a>
+      <a href="index.html#examples">Examples</a>
+    </div>
+  </nav>
+  
+  <header class="hero">
+    <img src="logo.svg" alt="jsonptrget mark">
+    <div>
+      <p class="kicker sans">CLI reference · 1.00</p>
+      <h1>jsonptrget</h1>
+      <p class="lede">Every flag, subcommand, and exit code. Same examples as the README.</p>
+    </div>
+  </header>
+  <div class="wrap">
+    <section>
+      <h2>Synopsis</h2>
+      <pre><code>jsonptrget [options] &lt;pointer&gt;</code></pre>
+      <div class="callout sans"><strong>Tip:</strong> <code>jsonptrget --help</code> prints this text in the terminal. <code>jsonptrget --version</code> prints <code>1.0.0</code>.</div>
+    </section>
+    <section>
+      <h2>Flags and arguments</h2>
+      <table class="sans"><thead><tr><th>Flag / argument</th><th>Meaning</th></tr></thead><tbody><tr><td><code>-h, --help</code></td><td>Print detailed usage and exit 0.</td></tr><tr><td><code>-v, --version</code></td><td>Print 1.0.0 and exit 0.</td></tr><tr><td><code>&lt;pointer&gt;</code></td><td>JSON Pointer starting with /. Empty pointer is the whole document. ~0 and ~1 unescaping is supported.</td></tr></tbody></table>
+    </section>
+    <section>
+      <h2>Exit codes</h2>
+      <table class="sans"><thead><tr><th>Code</th><th>Meaning</th></tr></thead><tbody><tr><td><code>0</code></td><td>Pointer resolved.</td></tr><tr><td><code>1</code></td><td>Missing pointer, invalid JSON, or missing path.</td></tr></tbody></table>
+    </section>
+    <section>
+      <h2>Configuration</h2>
+      <p>JSON is read from stdin. Strings print raw; other values print JSON.stringify. Missing paths error.</p>
+    </section>
+    <section id="examples">
+      <h2>Worked examples</h2>
+      <h3 class="ok">Success path</h3>
+      <pre><code>echo '{"a":{"b":[false, {"x/y": 9}]}}' | jsonptrget /a/b/1/x~1y</code></pre><p>Prints `9`.</p>
+      <h3 class="fail">Failure path</h3>
+      <pre><code>echo '{"a":1}' | jsonptrget /missing</code></pre><pre><code>missing missing</code></pre><p>Exit code is 1.</p>
+    </section>
+  </div>
+  <footer class="sans">
+    MIT © 2026 theworker02 · version <strong>1.00</strong> (<code>1.0.0</code>) ·
+    navy <code>#0B1F33</code> · gold <code>#C9A227</code> ·
+    <a href="https://github.com/theworker02/jsonptrget">GitHub</a> ·
+    <a href="https://thanks.dev/u/gh/theworker02">thanks.dev</a>
+  </footer>
+</body>
+</html>
