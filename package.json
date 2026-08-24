@@ -1,9 +1,9 @@
 {
-  "name": "jsonptrget",
+  "name": "@magnexis/jsonptrget",
   "version": "1.0.0",
   "description": "Read JSON from stdin and print the value at a pointer such as /a/b.",
   "bin": {
-    "jsonptrget": "./src/cli.js"
+    "jsonptrget": "src/cli.js"
   },
   "main": "./src/index.js",
   "scripts": {
@@ -32,5 +32,8 @@
     "json-pointer",
     "rfc6901",
     "cli"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }

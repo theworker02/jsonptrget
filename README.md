@@ -9,10 +9,11 @@
 ![license MIT](https://img.shields.io/badge/license-MIT-0B1F33)
 ![node >=18](https://img.shields.io/badge/node-%3E%3D18-C9A227?labelColor=0B1F33)
 ![release 1.00](https://img.shields.io/github/v/release/theworker02/jsonptrget?display_name=release)
+[![npm](https://img.shields.io/npm/v/@magnexis/jsonptrget.svg)](https://www.npmjs.com/package/@magnexis/jsonptrget)
 
 Package version **1.00** (`1.0.0`). Default branch is **`main`** — never `master`.
 
-**Docs:** [GitHub Pages](https://theworker02.github.io/jsonptrget/) · **Source:** [`theworker02/jsonptrget`](https://github.com/theworker02/jsonptrget) · **Release 1.00:** [`v1.0.0`](https://github.com/theworker02/jsonptrget/releases/tag/v1.0.0)
+**Docs:** [GitHub Pages](https://theworker02.github.io/jsonptrget/) · **Source:** [`theworker02/jsonptrget`](https://github.com/theworker02/jsonptrget) · **Release 1.00:** [`v1.0.0`](https://github.com/theworker02/jsonptrget/releases/tag/v1.0.0) · **npm:** [`@magnexis/jsonptrget`](https://www.npmjs.com/package/@magnexis/jsonptrget)
 
 ## Why it exists
 
@@ -25,6 +26,15 @@ Script authors extracting one field from an API body or a lockfile without a ful
 ## Install
 
 Requires Node.js 18 or newer. No extra npm dependencies.
+
+### Global install from npm
+
+```bash
+npm install -g @magnexis/jsonptrget
+jsonptrget --help
+```
+
+Package page: https://www.npmjs.com/package/@magnexis/jsonptrget
 
 ### Global install from GitHub
 
@@ -44,7 +54,7 @@ npm install -g .
 ### Run without installing (npx / node)
 
 ```bash
-npx --yes git+https://github.com/theworker02/jsonptrget.git --help
+npx --yes @magnexis/jsonptrget --help
 node src/cli.js --help
 ```
 
