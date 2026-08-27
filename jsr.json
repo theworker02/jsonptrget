@@ -1,0 +1,13 @@
+{
+  "name": "@theworker02/jsonptrget",
+  "version": "1.1.0",
+  "exports": "./jsr/mod.js",
+  "publish": {
+    "include": [
+      "jsr/mod.js",
+      "jsr/mod.d.ts",
+      "README.md",
+      "LICENSE"
+    ]
+  }
+}
