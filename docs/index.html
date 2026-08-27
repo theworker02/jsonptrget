@@ -3,135 +3,67 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>jsonptrget  · 1.00</title>
+  <title>jsonptrget · JSR</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <nav class="nav sans">
     <a class="brand-lockup" href="index.html"><img src="logo.svg" alt=""> jsonptrget</a>
     <div class="links">
-      <a href="index.html#overview">Overview</a>
-      <a href="index.html#install">Install</a>
-      <a href="usage.html">Usage</a>
-      <a href="index.html#examples">Examples</a>
+      <a href="#overview">Overview</a>
+      <a href="#api">API</a>
+      <a href="usage.html">CLI</a>
+      <a href="https://jsr.io/@theworker02/jsonptrget">JSR</a>
       <a href="https://github.com/theworker02/jsonptrget">GitHub</a>
-      <a href="https://www.npmjs.com/package/%40magnexis/jsonptrget">npm</a>
-      <a href="https://github.com/theworker02/jsonptrget/releases/tag/v1.0.0">1.00</a>
     </div>
   </nav>
-  
+
   <header class="hero">
     <img src="logo.svg" alt="jsonptrget mark">
     <div>
-      <p class="kicker sans">theworker02 · version 1.00</p>
+      <p class="kicker sans">theworker02 · JSR package</p>
       <h1>jsonptrget</h1>
-      <p class="lede">Read JSON from stdin and print the value at a pointer such as /a/b.</p>
+      <p class="lede">Typed RFC 6901 JSON Pointer utilities plus a focused Node.js CLI.</p>
       <div class="badges sans">
-        <span class="badge">1.00 / 1.0.0</span>
-        <span class="badge">branch main</span>
+        <span class="badge">JSR @theworker02/jsonptrget</span>
+        <span class="badge">ESM</span>
         <span class="badge">MIT</span>
-        <span class="badge">Node.js >= 18</span>
+        <span class="badge">Node.js CLI ≥ 18</span>
       </div>
     </div>
   </header>
+
   <div class="wrap">
     <section id="overview">
       <h2>Overview</h2>
-      <p>jq is powerful but heavy for one lookup. jsonptrget implements JSON Pointer (RFC 6901) for a single get.</p>
-      <p>Script authors extracting one field from an API body or a lockfile without a full JSON query language.</p>
+      <p>jsonptrget implements RFC 6901 pointer traversal with a small documented ESM package surface and a separate repository CLI.</p>
+      <p>Public distribution now lives on <a href="https://jsr.io/@theworker02/jsonptrget"><code>@theworker02/jsonptrget</code> on JSR</a>.</p>
     </section>
-    <section id="install">
-      <h2>Install</h2>
-      <p>Install globally from npm, or run with Node from a clone. There are no extra dependencies.</p>
-      <p>Package: <a href="https://www.npmjs.com/package/%40magnexis/jsonptrget"><code>@magnexis/jsonptrget</code></a></p>
-      <pre><code>npm i -g @magnexis/jsonptrget
-jsonptrget --help</code></pre>
-      <pre><code>jsonptrget 1.00 (1.0.0)
 
-Usage:
-  jsonptrget [options] &lt;pointer...&gt; [file|-]
-  jsonptrget /name &lt; pkg.json
-  echo '{"a":{"b":1}}' | jsonptrget /a/b
+    <section id="api">
+      <h2>Package API</h2>
+      <pre><code>import { getPointer, hasPointer, setPointer } from "jsr:@theworker02/jsonptrget";
 
-Read JSON from a file or stdin and print the value at one or more
-RFC 6901 JSON Pointers.
-
-Pointers:
-  /a/b       object walk
-  /items/0   array index
-  ~1         escaped slash
-  ~0         escaped tilde
-  (empty)    whole document — pass "" as the pointer
-
-Options:
-  -h, --help         Show this help and exit 0
-  -V, -v, --version  Print 1.0.0 and exit 0
-  --raw              Print string values without JSON quotes
-  --pretty           Pretty-print JSON values
-  --file &lt;path&gt;      JSON file (otherwise last positional path, or stdin)
-  --set &lt;json&gt;       Set the first pointer to this JSON value and print the
-                     whole document (writes stdout only; does not save)
-
-When several pointers are given, each value is printed on its own line.
-With more than one pointer, --json is implied as
-  [{"pointer","value"}, ...]
-
-Exit codes:
-  0  every pointer resolved (or --set succeeded)
-  1  missing pointer, invalid JSON, or unreadable file
-
-Examples:
-  jsonptrget /name package.json
-  jsonptrget --pretty /scripts package.json
-  jsonptrget --raw /greeting &lt;&lt;EOF
-  {"greeting":"hi"}
-  EOF
-  jsonptrget --set '{"ok":true}' /flag data.json</code></pre>
+const doc = { app: { name: "Nex" } };
+console.log(getPointer(doc, "/app/name"));
+console.log(hasPointer(doc, "/app/version"));
+setPointer(doc, "/app/version", 2);</code></pre>
+      <p>Also exports <code>tokensOf</code>, <code>escapeToken</code>, <code>unescapeToken</code>, <code>parseJsonValue</code>, <code>formatValue</code>, and <code>PACKAGE</code>.</p>
     </section>
-    <section id="usage">
-      <h2>Usage</h2>
-      <p>Synopsis: <code>jsonptrget [options] &lt;pointer&gt;</code></p>
-      <p>See the <a href="usage.html">full CLI reference</a> for every flag, exit code, and example.</p>
-      <pre><code>jsonptrget 1.00 (1.0.0)
 
-Usage:
-  jsonptrget &lt;pointer&gt; &lt; data.json
-  jsonptrget --help
-  jsonptrget --version
-
-JSON Pointer (RFC 6901):
-  /a/b       object walk
-  /items/0   array index
-  ~1         escaped slash
-  ~0         escaped tilde
-  (empty)    whole document
-
-Options:
-  -h, --help       Show this help
-  -v, --version    Print 1.0.0
-
-Examples:
-  jsonptrget /name &lt; pkg.json
-  echo '{"a":{"b":1}}' | jsonptrget /a/b</code></pre>
-    </section>
-    <section id="examples">
-      <h2>Examples</h2>
-      <div class="grid-2">
-        <div>
-          <h3 class="ok">Success</h3>
-          <p>Read a pointer from a JSON file.</p><pre><code>jsonptrget --raw /greeting data.json</code></pre><pre><code>hi</code></pre>
-        </div>
-        <div>
-          <h3 class="fail">Failure</h3>
-          <p>A missing pointer exits 1.</p><pre><code>jsonptrget /nope data.json</code></pre><pre><code>missing nope</code></pre><p>Exit code is 1.</p>
-        </div>
-      </div>
+    <section id="cli">
+      <h2>CLI</h2>
+      <p>The repository CLI remains available for Node.js 18+ users.</p>
+      <pre><code>git clone https://github.com/theworker02/jsonptrget.git
+cd jsonptrget
+node src/cli.js /name package.json</code></pre>
+      <p>See the <a href="usage.html">full CLI reference</a>.</p>
     </section>
   </div>
+
   <footer class="sans">
-    MIT © 2026 theworker02 · version <strong>1.00</strong> (<code>1.0.0</code>) ·
-    navy <code>#0B1F33</code> · gold <code>#C9A227</code> ·
-    <a href="https://www.npmjs.com/package/%40magnexis/jsonptrget">npm</a> ·
+    MIT © 2026 theworker02 ·
+    <a href="https://jsr.io/@theworker02/jsonptrget">JSR</a> ·
     <a href="https://github.com/theworker02/jsonptrget">GitHub</a> ·
     <a href="https://thanks.dev/u/gh/theworker02">thanks.dev</a>
   </footer>
