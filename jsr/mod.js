@@ -5,24 +5,41 @@
  * @ts-self-types="./mod.d.ts"
  */
 
-/** Split an RFC 6901 pointer into decoded path tokens. */
+/**
+ * Split an RFC 6901 pointer into decoded path tokens.
+ * @param {string | null | undefined} pointer
+ * @returns {string[]}
+ */
 export function tokensOf(pointer) {
   if (pointer == null || pointer === "") return [];
   if (!String(pointer).startsWith("/")) throw new Error("pointer must start with /");
   return String(pointer).slice(1).split("/").map(unescapeToken);
 }
 
-/** Decode one RFC 6901 token. */
+/**
+ * Decode one RFC 6901 token.
+ * @param {string} token
+ * @returns {string}
+ */
 export function unescapeToken(token) {
   return String(token).replaceAll("~1", "/").replaceAll("~0", "~");
 }
 
-/** Encode one path token for use in an RFC 6901 pointer. */
+/**
+ * Encode one path token for use in an RFC 6901 pointer.
+ * @param {string} token
+ * @returns {string}
+ */
 export function escapeToken(token) {
   return String(token).replaceAll("~", "~0").replaceAll("/", "~1");
 }
 
-/** Resolve a JSON Pointer against an object or array. */
+/**
+ * Resolve a JSON Pointer against an object or array.
+ * @param {unknown} doc
+ * @param {string} pointer
+ * @returns {unknown}
+ */
 export function getPointer(doc, pointer) {
   const tokens = tokensOf(pointer);
   let current = doc;
@@ -41,11 +58,18 @@ export function getPointer(doc, pointer) {
   return current;
 }
 
-/** Set a value at an RFC 6901 pointer and return the original document. */
+/**
+ * Set a value at an RFC 6901 pointer and return the original document.
+ * @template T
+ * @param {T} doc
+ * @param {string} pointer
+ * @param {unknown} value
+ * @returns {T}
+ */
 export function setPointer(doc, pointer, value) {
   const tokens = tokensOf(pointer);
   if (!tokens.length) throw new Error("cannot replace the root document with --set");
-  let current = doc;
+  let current = /** @type {any} */ (doc);
   for (let i = 0; i < tokens.length - 1; i += 1) {
     const token = tokens[i];
     if (current == null || typeof current !== "object") throw new Error(`cannot walk into ${token}`);
@@ -69,25 +93,39 @@ export function setPointer(doc, pointer, value) {
   return doc;
 }
 
-/** Parse a CLI-style JSON value, falling back to the original string. */
+/**
+ * Parse a CLI-style JSON value, falling back to the original string.
+ * @param {string} raw
+ * @returns {unknown}
+ */
 export function parseJsonValue(raw) {
   try { return JSON.parse(raw); } catch { return raw; }
 }
 
-/** Format a value for CLI or programmatic display. */
+/**
+ * Format a value for CLI or programmatic display.
+ * @param {unknown} value
+ * @param {{raw?: boolean, pretty?: boolean}} [options]
+ * @returns {string | undefined}
+ */
 export function formatValue(value, { raw = false, pretty = false } = {}) {
   if (raw && typeof value === "string") return value;
   return pretty ? JSON.stringify(value, null, 2) : JSON.stringify(value);
 }
 
-/** Test whether a pointer exists without throwing. */
+/**
+ * Test whether a pointer exists without throwing.
+ * @param {unknown} doc
+ * @param {string} pointer
+ * @returns {boolean}
+ */
 export function hasPointer(doc, pointer) {
   try { getPointer(doc, pointer); return true; } catch { return false; }
 }
 
 /** Package metadata exposed for tooling and generated documentation. */
-export const PACKAGE = Object.freeze({
+export const PACKAGE = /** @type {const} */ (Object.freeze({
   name: "@theworker02/jsonptrget",
-  version: "1.1.0",
+  version: "1.2.0",
   standard: "RFC 6901"
-});
+}));
