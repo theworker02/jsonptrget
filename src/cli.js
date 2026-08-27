@@ -57,7 +57,8 @@ async function main() {
   let file = flags.file;
   if (!file && rest.length) {
     const last = rest[rest.length - 1];
-    if (last === "-" || (last && !last.startsWith("/") && fs.existsSync(last))) {
+    const existingFile = rest.length > 1 && last && fs.existsSync(last) && fs.statSync(last).isFile();
+    if (last === "-" || existingFile || (last && !last.startsWith("/") && fs.existsSync(last))) {
       file = rest.pop();
     }
   }
