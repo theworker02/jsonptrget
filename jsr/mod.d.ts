@@ -14,7 +14,7 @@ export interface PackageMetadata {
   /** Fully scoped JSR package name. */
   name: "@theworker02/jsonptrget";
   /** Published semantic version. */
-  version: "1.1.0";
+  version: "1.2.0";
   /** Pointer standard implemented by the package. */
   standard: "RFC 6901";
 }
