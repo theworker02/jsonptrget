@@ -1,28 +1,36 @@
 # jsonptrget
 
+
+---
+
+## License & acquisition
+
+This project is **proprietary**. Production use, redistribution, and commercial deployment require a written commercial license or completed acquisition. See [`LICENSE`](./LICENSE) and [`ACQUISITION.md`](./ACQUISITION.md). Contact [@theworker02](https://github.com/theworker02).
+
+
 <img src="docs/logo.svg" alt="jsonptrget mark" width="96" height="96">
 
 **Read and update RFC 6901 JSON Pointer values with a tiny CLI and a typed ESM API.**
 
 [![JSR](https://jsr.io/badges/@theworker02/jsonptrget)](https://jsr.io/@theworker02/jsonptrget)
 ![branch main](https://img.shields.io/badge/branch-main-0B1F33?labelColor=C9A227)
-![license MIT](https://img.shields.io/badge/license-MIT-0B1F33)
+![license proprietary](https://img.shields.io/badge/license-proprietary-0B1F33)
 ![node >=18](https://img.shields.io/badge/node-%3E%3D18-C9A227?labelColor=0B1F33)
 
-**JSR:** [`@theworker02/jsonptrget`](https://jsr.io/@theworker02/jsonptrget) · **Docs:** [GitHub Pages](https://theworker02.github.io/jsonptrget/) · **Source:** [`theworker02/jsonptrget`](https://github.com/theworker02/jsonptrget)
+**JSR:** [`@theworker02/jsonptrget`](https://jsr.io/@theworker02/jsonptrget) Â· **Docs:** [GitHub Pages](https://theworker02.github.io/jsonptrget/) Â· **Source:** [`theworker02/jsonptrget`](https://github.com/theworker02/jsonptrget)
 
 ## Package API
 
 The JSR package exposes a documented ESM API for RFC 6901 operations:
 
-- `getPointer()` — resolve a pointer against an object or array
-- `setPointer()` — update a value at a pointer
-- `hasPointer()` — test pointer existence without throwing
-- `tokensOf()` — parse a pointer into decoded tokens
-- `escapeToken()` / `unescapeToken()` — encode and decode pointer path segments
-- `parseJsonValue()` — parse CLI-style JSON input with string fallback
-- `formatValue()` — format values for raw or pretty output
-- `PACKAGE` — package metadata for tooling
+- `getPointer()` â€” resolve a pointer against an object or array
+- `setPointer()` â€” update a value at a pointer
+- `hasPointer()` â€” test pointer existence without throwing
+- `tokensOf()` â€” parse a pointer into decoded tokens
+- `escapeToken()` / `unescapeToken()` â€” encode and decode pointer path segments
+- `parseJsonValue()` â€” parse CLI-style JSON input with string fallback
+- `formatValue()` â€” format values for raw or pretty output
+- `PACKAGE` â€” package metadata for tooling
 
 ```ts
 import { getPointer, hasPointer, setPointer } from "jsr:@theworker02/jsonptrget";
@@ -82,7 +90,7 @@ See [SECURITY.md](SECURITY.md). Please report vulnerabilities privately.
 
 ## License
 
-[MIT](LICENSE) © 2026 theworker02
+[MIT](LICENSE) Â© 2026 theworker02
 
 ## Funding
 
