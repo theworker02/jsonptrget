@@ -17,20 +17,20 @@ This project is **proprietary**. Production use, redistribution, and commercial 
 ![license proprietary](https://img.shields.io/badge/license-proprietary-0B1F33)
 ![node >=18](https://img.shields.io/badge/node-%3E%3D18-C9A227?labelColor=0B1F33)
 
-**JSR:** [`@theworker02/jsonptrget`](https://jsr.io/@theworker02/jsonptrget) Â· **Docs:** [GitHub Pages](https://theworker02.github.io/jsonptrget/) Â· **Source:** [`theworker02/jsonptrget`](https://github.com/theworker02/jsonptrget)
+**JSR:** [`@theworker02/jsonptrget`](https://jsr.io/@theworker02/jsonptrget) Ã‚Â· **Docs:** [GitHub Pages](https://theworker02.github.io/jsonptrget/) Ã‚Â· **Source:** [`theworker02/jsonptrget`](https://github.com/theworker02/jsonptrget)
 
 ## Package API
 
 The JSR package exposes a documented ESM API for RFC 6901 operations:
 
-- `getPointer()` â€” resolve a pointer against an object or array
-- `setPointer()` â€” update a value at a pointer
-- `hasPointer()` â€” test pointer existence without throwing
-- `tokensOf()` â€” parse a pointer into decoded tokens
-- `escapeToken()` / `unescapeToken()` â€” encode and decode pointer path segments
-- `parseJsonValue()` â€” parse CLI-style JSON input with string fallback
-- `formatValue()` â€” format values for raw or pretty output
-- `PACKAGE` â€” package metadata for tooling
+- `getPointer()` Ã¢â‚¬â€ resolve a pointer against an object or array
+- `setPointer()` Ã¢â‚¬â€ update a value at a pointer
+- `hasPointer()` Ã¢â‚¬â€ test pointer existence without throwing
+- `tokensOf()` Ã¢â‚¬â€ parse a pointer into decoded tokens
+- `escapeToken()` / `unescapeToken()` Ã¢â‚¬â€ encode and decode pointer path segments
+- `parseJsonValue()` Ã¢â‚¬â€ parse CLI-style JSON input with string fallback
+- `formatValue()` Ã¢â‚¬â€ format values for raw or pretty output
+- `PACKAGE` Ã¢â‚¬â€ package metadata for tooling
 
 ```ts
 import { getPointer, hasPointer, setPointer } from "jsr:@theworker02/jsonptrget";
@@ -90,9 +90,13 @@ See [SECURITY.md](SECURITY.md). Please report vulnerabilities privately.
 
 ## License
 
-[MIT](LICENSE) Â© 2026 theworker02
+[MIT](LICENSE) Ã‚Â© 2026 theworker02
 
 ## Funding
 
 - GitHub Sponsors: [theworker02](https://github.com/sponsors/theworker02)
 - thanks.dev: [https://thanks.dev/u/gh/theworker02](https://thanks.dev/u/gh/theworker02)
+
+## Status
+
+jsonptrget is actively packaged for commercial licensing and acquisition diligence. See [ACQUISITION.md](./ACQUISITION.md) and [docs/acquisition/](./docs/acquisition/).
